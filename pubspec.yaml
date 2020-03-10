@@ -1,0 +1,26 @@
+name: file_selector
+description: A new Flutter package project.
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flinq: ^1.1.1
+
+  file_picker: ^1.4.3+2
+  file_chooser:
+    git:
+      url: git://github.com/google/flutter-desktop-embedding.git
+      path: plugins/file_chooser
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
