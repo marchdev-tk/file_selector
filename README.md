@@ -34,13 +34,13 @@ where:
 * `confirmButtonText` (works only on `Desktop`) if set, changes default confirmation text on file picker popup;
 
 * `type` represents the group of required types of specific type, could be one of the following:
-    * any or `*/*`
-    * img or `image/*`
-        * png or `image/png`
-        * jpg or `image/jpeg`
-        * gif or `image/gif`
-        * bmp or `image/bmp`
-    * pdf or `application/pdf`
+    * `any` or `*/*`
+    * `img` or `image/*`
+        * `png` or `image/png`
+        * `jpg` or `image/jpeg`
+        * `gif` or `image/gif`
+        * `bmp` or `image/bmp`
+    * `pdf` or `application/pdf`
 
 ### To pick multiple file use:
 
@@ -52,6 +52,12 @@ final List<File> files = await FileSelector().pickFiles(
 ```
 
 The only difference of `pickFiles` method from `pickFile` is that multiple files could be selected same as multiple `types`.
+
+### Return type of `File` contains folowing fields:
+
+* `name` of the file
+* `path` to the file, for Web it is empty
+* `bytes` array of bytes
 
 ## Feature requests and Bug reports
 
