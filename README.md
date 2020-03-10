@@ -53,7 +53,7 @@ final List<File> files = await FileSelector().pickFiles(
 
 The only difference of `pickFiles` method from `pickFile` is that multiple files could be selected same as multiple `types`.
 
-### Return type of `File` contains folowing fields:
+### Return type `File` contains folowing fields:
 
 * `name` of the file
 * `path` to the file, for Web it is empty
