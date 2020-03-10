@@ -1,8 +1,7 @@
 name: file_selector
-description: A new Flutter package project.
-version: 0.0.1
-author:
-homepage:
+version: 1.0.0
+homepage: https://github.com/marchdev-tk/file_selector
+description: File selection on both Mobile (Android/iOS), Web and Desktop (Windows, macOS, Linux)
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
