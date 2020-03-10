@@ -1,14 +1,58 @@
 # file_selector
 
-A new Flutter package project.
+![Build](https://github.com/marchdev-tk/file_selector/workflows/build/badge.svg)
+![GitHub](https://img.shields.io/github/license/marchdev-tk/file_selector)
+![GitHub stars](https://img.shields.io/github/stars/marchdev-tk/file_selector?style=social)
 
 ## Getting Started
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+In order to use this plugin, add dependency in the `pubspec.yaml`:
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```yaml
+file_selector:
+    git:
+      url: https://github.com/marchdev-tk/file_selector
+```
+
+Add an import to dart file:
+
+```dart
+import 'package:file_selector/file_selector.dart';
+```
+
+### To pick single file use:
+
+```dart
+final File file = await FileSelector().pickFile(
+    type: FileType.img,
+    confirmButtonText: 'Select',
+);
+```
+
+where: 
+
+* `confirmButtonText` (works only on `Desktop`) if set, changes default confirmation text on file picker popup;
+
+* `type` represents the group of required types of specific type, could be one of the following:
+    * any or `*/*`
+    * img or `image/*`
+        * png or `image/png`
+        * jpg or `image/jpeg`
+        * gif or `image/gif`
+        * bmp or `image/bmp`
+    * pdf or `application/pdf`
+
+### To pick multiple file use:
+
+```dart
+final List<File> files = await FileSelector().pickFiles(
+    types: [FileType.png, FileType.bmp],
+    confirmButtonText: 'Select',
+);
+```
+
+The only difference of `pickFiles` method from `pickFile` is that multiple files could be selected same as multiple `types`.
+
+## Feature requests and Bug reports
+
+Feel free to post a feature requests or report a bug [here](https://github.com/marchdev-tk/file_selector/issues).
