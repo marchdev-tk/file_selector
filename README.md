@@ -20,6 +20,16 @@ Add an import to dart file:
 import 'package:file_selector/file_selector.dart';
 ```
 
+### Samples
+
+Web sample:
+
+![Web Sample](../assets/fs_web.gif?raw=true)
+
+Mobile sample:
+
+![Mobile Sample](../assets/fs_mobile.gif?raw=true)
+
 ### To pick single file use:
 
 ```dart

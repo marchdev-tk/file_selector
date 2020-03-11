@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  pedantic: ^1.8.0
   flinq: ^1.1.1
 
   file_picker: ^1.4.3+2
@@ -22,5 +21,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  pedantic: ^1.8.0
 
 flutter:
