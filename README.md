@@ -26,6 +26,10 @@ Web sample:
 
 ![Web Sample](../assets/fs_web.gif?raw=true)
 
+Desktop sample:
+
+![Desktop Sample](../assets/fs_desktop.gif?raw=true)
+
 Mobile sample:
 
 ![Mobile Sample](../assets/fs_mobile.gif?raw=true)
