@@ -14,6 +14,9 @@ class File {
   final String name;
   final String path;
   final Uint8List bytes;
+
+  String get fileExtension => name.split('.').last;
+  String get type => FileType.getTypeFromExtension(fileExtension);
 }
 
 class FileType implements Comparable<FileType> {
@@ -57,6 +60,22 @@ class FileType implements Comparable<FileType> {
   static const pdf = FileType(2, 'application/pdf', 'pdf');
 
   bool get isImage => _type.startsWith('image/');
+
+  static String getTypeFromExtension(String fileExtension) {
+    if (fileExtension == pdf.fileExtensions) {
+      return pdf.type;
+    } else if (fileExtension == png.fileExtensions) {
+      return png.type;
+    } else if (fileExtension == gif.fileExtensions) {
+      return gif.type;
+    } else if (fileExtension == bmp.fileExtensions) {
+      return bmp.type;
+    } else if (jpg.fileExtensions.contains(fileExtension)) {
+      return jpg.type;
+    }
+
+    return any.type;
+  }
 
   @override
   String toString() => type;
