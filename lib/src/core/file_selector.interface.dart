@@ -4,12 +4,31 @@
 
 import 'file.dart';
 
+/// Interface of available [FileSelector] operations.
+///
+/// It consists of:
+///  * `pickFile` - for picking only one file
+///  * `pickMultipleFiles` - for picking several files
 abstract class FileSelectorInterface {
+  /// Picking anly one file.
+  ///
+  /// `type` is a descriptor of the file type (MIME type and
+  /// acceptable extensions)
+  ///
+  /// `confirmButtonText` replaces complete button title
+  /// (works only on desktop platforms).
   Future<File> pickFile({
     FileType type = FileType.any,
     String confirmButtonText,
   });
 
+  /// Picking several files.
+  ///
+  /// `types` is a [List] of descriptors of the file types (MIME
+  /// type and acceptable extensions)
+  ///
+  /// `confirmButtonText` replaces complete button title
+  /// (works only on desktop platforms).
   Future<List<File>> pickMultipleFiles({
     List<FileType> types = const [FileType.any],
     String confirmButtonText,

@@ -14,16 +14,16 @@ import '../core/file_selector.interface.dart';
 class FileSelectorMobile extends FileSelectorInterface {
   fp.FileType _toFilePickerFileType(FileType type) {
     if (type.isImage) {
-      return fp.FileType.IMAGE;
+      return fp.FileType.image;
     }
 
     switch (type) {
       case FileType.pdf:
-        return fp.FileType.CUSTOM;
+        return fp.FileType.custom;
 
       case FileType.any:
       default:
-        return fp.FileType.ANY;
+        return fp.FileType.any;
     }
   }
 

@@ -7,12 +7,17 @@ import 'dart:io';
 import 'file.dart';
 import 'file_selector.interface.dart';
 
+/// Allows to pick one or several files.
+/// 
+/// Implemetation of [FileSelectorInterface].
+///
+/// It consists of:
+///  * `pickFile` - for picking only one file
+///  * `pickMultipleFiles` - for picking several files
 class FileSelector implements FileSelectorInterface {
-  const FileSelector._();
-
   factory FileSelector() => _instance;
-
-  static FileSelector _instance = FileSelector._();
+  const FileSelector._();
+  static const FileSelector _instance = FileSelector._();
 
   @override
   Future<File> pickFile({
