@@ -37,7 +37,7 @@ class FileSelectorMobile extends FileSelectorInterface {
   }) async {
     final file = await FilePicker.getFile(
       type: _toFilePickerFileType(type),
-      fileExtension: type.fileExtensions,
+      allowedExtensions: type.fileExtensions.split('|'),
     );
 
     if (file == null) return null;
@@ -63,7 +63,7 @@ class FileSelectorMobile extends FileSelectorInterface {
 
     final files = await FilePicker.getMultiFile(
       type: _toFilePickerFileType(type),
-      fileExtension: type.fileExtensions,
+      allowedExtensions: type.fileExtensions.split('|'),
     );
 
     if (files == null) return null;
