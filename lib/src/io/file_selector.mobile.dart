@@ -2,9 +2,6 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-import 'dart:io' as io;
-import 'dart:typed_data';
-
 import 'package:file_picker/file_picker.dart' hide FileType;
 import 'package:file_picker/file_picker.dart' as fp show FileType;
 
@@ -27,25 +24,23 @@ class FileSelectorMobile extends FileSelectorInterface {
     }
   }
 
-  Future<Uint8List> _getBytes(io.File file) async =>
-      Uint8List.fromList(await file.readAsBytes());
-
   @override
   Future<File> pickFile({
     FileType type = FileType.any,
     String confirmButtonText,
   }) async {
-    final file = await FilePicker.getFile(
+    final file = await FilePicker.platform.pickFiles(
       type: _toFilePickerFileType(type),
       allowedExtensions: type.fileExtensions.split('|'),
     );
 
-    if (file == null) return null;
+    if (file?.files?.isNotEmpty != true) return null;
 
+    final _file = file.files.first;
     return File(
-      name: file.path.split('/').last,
-      path: file.path,
-      bytes: await _getBytes(file),
+      name: _file.path.split('/').last,
+      path: _file.path,
+      bytes: _file.bytes,
     );
   }
 
@@ -61,19 +56,19 @@ class FileSelectorMobile extends FileSelectorInterface {
       type = FileType.img;
     }
 
-    final files = await FilePicker.getMultiFile(
+    final files = await FilePicker.platform.pickFiles(
       type: _toFilePickerFileType(type),
       allowedExtensions: type.fileExtensions.split('|'),
     );
 
-    if (files == null) return null;
+    if (files?.files?.isNotEmpty != true) return null;
 
     List<File> result = [];
-    for (var file in files) {
+    for (var file in files.files) {
       result.add(File(
         name: file.path.split('/').last,
         path: file.path,
-        bytes: await _getBytes(file),
+        bytes: file.bytes,
       ));
     }
 
