@@ -1,7 +1,9 @@
 name: file_selector
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/marchdev-tk/file_selector
 description: File selection on both Mobile (Android/iOS), Web and Desktop (Windows, macOS, Linux).
+
+publish_to: none
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
