@@ -4,6 +4,8 @@
 
 * Added video media types
 * Reorganized file types
+* Fixed mobile bytes retrieval
+* Fixed mobile filetype issue
 
 ## [1.0.0]
 
