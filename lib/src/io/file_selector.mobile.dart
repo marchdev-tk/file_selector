@@ -2,6 +2,9 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'dart:io' as io show File;
+import 'dart:typed_data';
+
 import 'package:file_picker/file_picker.dart' hide FileType;
 import 'package:file_picker/file_picker.dart' as fp show FileType;
 
@@ -27,6 +30,9 @@ class FileSelectorMobile extends FileSelectorInterface {
     return fp.FileType.any;
   }
 
+  Future<Uint8List> _getBytes(String path) async =>
+      Uint8List.fromList(await io.File(path).readAsBytes());
+
   @override
   Future<File> pickFile({
     FileType type,
@@ -45,10 +51,15 @@ class FileSelectorMobile extends FileSelectorInterface {
     if (file?.files?.isNotEmpty != true) return null;
 
     final _file = file.files.first;
+    Uint8List bytes = _file.bytes;
+    if (bytes == null) {
+      bytes = await _getBytes(_file.path);
+    }
+
     return File(
       name: _file.path.split('/').last,
       path: _file.path,
-      bytes: _file.bytes,
+      bytes: bytes,
     );
   }
 
@@ -84,10 +95,15 @@ class FileSelectorMobile extends FileSelectorInterface {
 
     List<File> result = [];
     for (var file in files.files) {
+      Uint8List bytes = file.bytes;
+      if (bytes == null) {
+        bytes = await _getBytes(file.path);
+      }
+
       result.add(File(
         name: file.path.split('/').last,
         path: file.path,
-        bytes: file.bytes,
+        bytes: bytes,
       ));
     }
 
