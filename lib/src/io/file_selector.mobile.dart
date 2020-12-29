@@ -10,11 +10,17 @@ import '../core/file_selector.interface.dart';
 
 class FileSelectorMobile extends FileSelectorInterface {
   fp.FileType _toFilePickerFileType(FileType type) {
-    if (type.isImage) {
+    if (type == FileType.media) {
+      return fp.FileType.media;
+    } else if (type.isImage) {
       return fp.FileType.image;
     } else if (type.isVideo) {
       return fp.FileType.video;
     } else if (type == FileType.pdf) {
+      return fp.FileType.custom;
+    }
+
+    if (type.fileExtensions?.isNotEmpty == true) {
       return fp.FileType.custom;
     }
 
@@ -28,9 +34,12 @@ class FileSelectorMobile extends FileSelectorInterface {
   }) async {
     type ??= FileType.any;
 
+    final fpFile = _toFilePickerFileType(type);
+
     final file = await FilePicker.platform.pickFiles(
-      type: _toFilePickerFileType(type),
-      allowedExtensions: type.fileExtensions.split('|'),
+      type: fpFile,
+      allowedExtensions:
+          fpFile == fp.FileType.custom ? type.fileExtensions.split('|') : null,
     );
 
     if (file?.files?.isNotEmpty != true) return null;
@@ -55,11 +64,20 @@ class FileSelectorMobile extends FileSelectorInterface {
       type = types[0];
     } else if (types.every((type) => type.isImage)) {
       type = FileType.img;
+    } else if (types.every((type) => type.isVideo)) {
+      type = FileType.video;
+    } else if (types.every((type) => type.isVideo || type.isImage)) {
+      type = FileType.media;
+    } else if (types.every((type) => type == FileType.pdf)) {
+      type = FileType.pdf;
     }
 
+    final fpFile = _toFilePickerFileType(type);
+
     final files = await FilePicker.platform.pickFiles(
-      type: _toFilePickerFileType(type),
-      allowedExtensions: type.fileExtensions.split('|'),
+      type: fpFile,
+      allowedExtensions:
+          fpFile == fp.FileType.custom ? type.fileExtensions.split('|') : null,
     );
 
     if (files?.files?.isNotEmpty != true) return null;
