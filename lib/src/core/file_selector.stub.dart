@@ -21,14 +21,14 @@ class FileSelector implements FileSelectorInterface {
 
   @override
   Future<File> pickFile({
-    FileType type = FileType.any,
+    FileType type,
     String confirmButtonText,
   }) =>
       throw UnimplementedError();
 
   @override
   Future<List<File>> pickMultipleFiles({
-    List<FileType> types = const [FileType.any],
+    List<FileType> types,
     String confirmButtonText,
   }) =>
       throw UnimplementedError();

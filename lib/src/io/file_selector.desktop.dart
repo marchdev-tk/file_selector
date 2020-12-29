@@ -23,6 +23,10 @@ class FileSelectorDesktop extends FileSelectorInterface {
         label = 'Images';
         break;
 
+      case 'video/*':
+        label = 'Videos';
+        break;
+
       default:
         label = type.type.split('/').last.toUpperCase();
     }
@@ -39,16 +43,11 @@ class FileSelectorDesktop extends FileSelectorInterface {
 
   @override
   Future<File> pickFile({
-    FileType type = FileType.any,
+    FileType type,
     String confirmButtonText,
   }) async {
-    assert(() {
-      if (type == null) {
-        throw ArgumentError.notNull('types');
-      }
+    type ??= FileType.any;
 
-      return true;
-    }());
     final result = await showOpenPanel(
       canSelectDirectories: false,
       allowsMultipleSelection: false,
@@ -71,16 +70,10 @@ class FileSelectorDesktop extends FileSelectorInterface {
 
   @override
   Future<List<File>> pickMultipleFiles({
-    List<FileType> types = const [FileType.any],
+    List<FileType> types,
     String confirmButtonText,
   }) async {
-    assert(() {
-      if (types == null) {
-        throw ArgumentError.notNull('types');
-      }
-
-      return true;
-    }());
+    types ??= [FileType.any];
 
     final result = await showOpenPanel(
       canSelectDirectories: false,

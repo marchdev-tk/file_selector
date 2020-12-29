@@ -12,23 +12,22 @@ class FileSelectorMobile extends FileSelectorInterface {
   fp.FileType _toFilePickerFileType(FileType type) {
     if (type.isImage) {
       return fp.FileType.image;
+    } else if (type.isVideo) {
+      return fp.FileType.video;
+    } else if (type == FileType.pdf) {
+      return fp.FileType.custom;
     }
 
-    switch (type) {
-      case FileType.pdf:
-        return fp.FileType.custom;
-
-      case FileType.any:
-      default:
-        return fp.FileType.any;
-    }
+    return fp.FileType.any;
   }
 
   @override
   Future<File> pickFile({
-    FileType type = FileType.any,
+    FileType type,
     String confirmButtonText,
   }) async {
+    type ??= FileType.any;
+
     final file = await FilePicker.platform.pickFiles(
       type: _toFilePickerFileType(type),
       allowedExtensions: type.fileExtensions.split('|'),
@@ -46,9 +45,11 @@ class FileSelectorMobile extends FileSelectorInterface {
 
   @override
   Future<List<File>> pickMultipleFiles({
-    List<FileType> types = const [FileType.any],
+    List<FileType> types,
     String confirmButtonText,
   }) async {
+    types ??= [FileType.any];
+
     FileType type = FileType.any;
     if (types.length == 1) {
       type = types[0];

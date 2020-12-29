@@ -12,7 +12,7 @@ import 'file_selector.web.dart';
 import '../core/file_selector.interface.dart';
 
 /// Allows to pick one or several files.
-/// 
+///
 /// Implemetation of [FileSelectorInterface].
 ///
 /// It consists of:
@@ -39,21 +39,21 @@ class FileSelector implements FileSelectorInterface {
 
   @override
   Future<File> pickFile({
-    FileType type = FileType.any,
+    FileType type,
     String confirmButtonText,
   }) =>
       _fileSelectorFactory()?.pickFile(
-        type: type,
+        type: type ?? FileType.any,
         confirmButtonText: confirmButtonText,
       );
 
   @override
   Future<List<File>> pickMultipleFiles({
-    List<FileType> types = const [FileType.any],
+    List<FileType> types,
     String confirmButtonText,
   }) =>
       _fileSelectorFactory()?.pickMultipleFiles(
-        types: types,
+        types: types ?? [FileType.any],
         confirmButtonText: confirmButtonText,
       );
 }

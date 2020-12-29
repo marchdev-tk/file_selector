@@ -14,11 +14,13 @@ abstract class FileSelectorInterface {
   ///
   /// `type` is a descriptor of the file type (MIME type and
   /// acceptable extensions)
+  /// 
+  /// Default `type` is [FileType.any].
   ///
   /// `confirmButtonText` replaces complete button title
   /// (works only on desktop platforms).
   Future<File> pickFile({
-    FileType type = FileType.any,
+    FileType type,
     String confirmButtonText,
   });
 
@@ -26,11 +28,13 @@ abstract class FileSelectorInterface {
   ///
   /// `types` is a [List] of descriptors of the file types (MIME
   /// type and acceptable extensions)
+  /// 
+  /// Default `types` are list of [FileType.any].
   ///
   /// `confirmButtonText` replaces complete button title
   /// (works only on desktop platforms).
   Future<List<File>> pickMultipleFiles({
-    List<FileType> types = const [FileType.any],
+    List<FileType> types,
     String confirmButtonText,
   });
 }

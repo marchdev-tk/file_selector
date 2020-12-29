@@ -43,9 +43,11 @@ class FileSelectorWeb extends FileSelectorInterface {
 
   @override
   Future<File> pickFile({
-    FileType type = FileType.any,
+    FileType type,
     String confirmButtonText,
   }) async {
+    type ??= FileType.any;
+
     final files = await _getFiles(type.type);
 
     if (files.length != 1) {
@@ -63,9 +65,11 @@ class FileSelectorWeb extends FileSelectorInterface {
 
   @override
   Future<List<File>> pickMultipleFiles({
-    List<FileType> types = const [FileType.any],
+    List<FileType> types,
     String confirmButtonText,
   }) async {
+    types ??= [FileType.any];
+
     String type = '*/*';
     if (types.length == 1) {
       type = types[0].type;

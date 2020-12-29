@@ -41,7 +41,7 @@ class File {
 
 /// Descriptor of the file type, it consists of MIME type and all
 /// acceptable file extensions.
-/// 
+///
 /// [_id] is an identifier of the [FileType], it is used only to
 /// compare two different file types.
 class FileType implements Comparable<FileType> {
@@ -80,8 +80,16 @@ class FileType implements Comparable<FileType> {
   /// otherwise - `false`.
   bool get isImage => _type.startsWith('image/');
 
+  /// Returns `true` if current MIME type [type] is a video,
+  /// otherwise - `false`.
+  bool get isVideo => _type.startsWith('video/');
+
   /// Represents `any` file type.
-  static const any = FileType(0, '*/*', null);
+  static final any = FileType(
+    0,
+    '*/*',
+    img._extensions + video._extensions + pdf._extensions,
+  );
 
   /// Represents `any image` file type.
   static const img = FileType(
@@ -108,6 +116,54 @@ class FileType implements Comparable<FileType> {
   /// Represents `pdf` file type.
   static const pdf = FileType(2, 'application/pdf', 'pdf');
 
+  /// Represents `any video` file type.
+  static const video = FileType(
+    3,
+    'video/*',
+    'mpg|mpeg|mp1|mp2|mp3|m1v|mpv|m1a|m2a|mpa'
+        'mp4'
+        'ogg|ogv|oga|ogx|spx|opus|ogm'
+        'webm'
+        'wmv'
+        'flv'
+        '3gpp|3gp'
+        '3gpp2|3g2',
+  );
+
+  /// Represents `mpeg` file type.
+  static const mpeg =
+      FileType(3, 'video/mpeg', 'mpg|mpeg|mp1|mp2|mp3|m1v|mpv|m1a|m2a|mpa');
+
+  /// Represents `mp4` file type.
+  static const mp4 = FileType(3, 'video/mp4', 'mp4');
+
+  /// Represents `ogg` file type.
+  static const ogg = FileType(3, 'video/ogg', 'ogg|ogv|oga|ogx|spx|opus|ogm');
+
+  /// Represents `webm` file type.
+  static const webm = FileType(3, 'video/webm', 'webm');
+
+  /// Represents `x-ms-wmv` file type.
+  static const wmv = FileType(3, 'video/x-ms-wmv', 'wmv');
+
+  /// Represents `x-flv` file type.
+  static const flv = FileType(3, 'video/x-flv', 'flv');
+
+  /// Represents `3gpp` file type.
+  static const threeGpp = FileType(3, 'video/3gpp', '3gpp|3gp');
+
+  /// Represents `3gpp2` file type.
+  static const threeGpp2 = FileType(3, 'video/3gpp2', '3gpp2|3g2');
+
+  /// Represents `any image or video` file type.
+  static final media = FileType(
+    4,
+    '*/*',
+    img._extensions + video._extensions,
+  );
+
+// video/quicktime: QuickTime
+
   // TODO: add more types
 
   /// Returns MIME type of [this] [FileType].
@@ -115,8 +171,11 @@ class FileType implements Comparable<FileType> {
   String toString() => type;
 
   @override
-  int compareTo(FileType other) =>
-      other._id == _id ? 0 : other._id > _id ? 1 : -1;
+  int compareTo(FileType other) => other._id == _id
+      ? 0
+      : other._id > _id
+          ? 1
+          : -1;
 
   /// Creates copy of [this] with new values, if the present.
   FileType copyWith({int id, String type, String fileExtension}) =>
