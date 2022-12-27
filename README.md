@@ -4,6 +4,8 @@
 ![GitHub](https://img.shields.io/github/license/marchdev-tk/file_selector)
 ![GitHub stars](https://img.shields.io/github/stars/marchdev-tk/file_selector?style=social)
 
+# THIS PLUGIN IS DISCONTINUED
+
 ## Getting Started
 
 In order to use this plugin, add dependency in the `pubspec.yaml`:
